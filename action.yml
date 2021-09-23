@@ -20,5 +20,4 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.command }}
-    - ${{ inputs.type }}
     - ${{ inputs.ref }}

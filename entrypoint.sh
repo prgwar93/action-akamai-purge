@@ -28,7 +28,7 @@ fi
 # esac
 
 # Create /root/.edgerc file from env variable
-echo -e "${EDGERC}" > /root/.edgerc
+echo -e "${AKAMAI_SECRET}" > /root/.edgerc
 
 echo 'Purging' ${_PURGE_REF}
 
