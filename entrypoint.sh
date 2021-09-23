@@ -3,8 +3,7 @@ set -e
 set -o pipefail
 
 _PURGE_COMMAND=$1
-_PURGE_TYPE=$2
-_PURGE_REF=$3
+_PURGE_REF=$2
 
 if [[ ${_PURGE_COMMAND} != "delete" ]] && [[ ${_PURGE_COMMAND} != "invalidate" ]]
 then
@@ -28,13 +27,11 @@ fi
 # esac
 
 # Create /root/.edgerc file from env variable
-echo -e "${AKAMAI_SECRET}" > /root/.edgerc
-
-echo 'Purging' ${_PURGE_REF}
+echo -e "${EDGERC}" > /root/.edgerc
 
 # Send purge request
 /usr/local/bin/purge \
   --edgerc /root/.edgerc \
   --section default \
   ${_PURGE_COMMAND} \
-  "${_PURGE_REF}"
+ "${_PURGE_REF}"
