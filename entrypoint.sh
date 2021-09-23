@@ -12,27 +12,29 @@ then
   exit 123
 fi
 
-case ${_PURGE_TYPE} in
-  cpcode)
-    _CLI_OPT="--cpcode"
-  ;;
+# case ${_PURGE_TYPE} in
+#   cpcode)
+#     _CLI_OPT="--cpcode"
+#   ;;
 
-  tag)
-    _CLI_OPT="--tag"
-  ;;
+#   tag)
+#     _CLI_OPT="--tag"
+#   ;;
 
-  *)
-    echo "Unknown type '${_PURGE_TYPE}' ... exiting"
-    exit 123
-  ;;
-esac
+#   *)
+#     echo "Unknown type '${_PURGE_TYPE}' ... exiting"
+#     exit 123
+#   ;;
+# esac
 
 # Create /root/.edgerc file from env variable
 echo -e "${EDGERC}" > /root/.edgerc
 
+echo 'Purging' ${_PURGE_REF}
+
 # Send purge request
 /usr/local/bin/purge \
   --edgerc /root/.edgerc \
-  --section ccu \
+  --section default \
   ${_PURGE_COMMAND} \
-  ${_CLI_OPT} "${_PURGE_REF}"
+  "${_PURGE_REF}"
