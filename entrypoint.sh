@@ -27,11 +27,17 @@ fi
 # esac
 
 # Create /root/.edgerc file from env variable
-echo -e "${AKAMAI_SECRET}" > /root/.edgerc
+# echo -e "${AKAMAI_SECRET}" > /root/.edgerc
+_URL=''
+for i in $(echo $_PURGE_REF | tr "," "\n")
+do
+	echo $i
 
 # Send purge request
 /usr/local/bin/purge \
   --edgerc /root/.edgerc \
   --section default \
   ${_PURGE_COMMAND} \
- "${_PURGE_REF}"
+ "$i"
+
+done
